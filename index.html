@@ -69,15 +69,19 @@
       border-bottom: 1px solid #ccc;
     }
     .image-box {
-      height: auto;
+      width: 100%;
+      max-width: 400px;
+      aspect-ratio: 9 / 16;
+      margin: 10px auto;
       display: flex;
       justify-content: center;
       align-items: center;
-      margin-top: 10px;
+      border: 1px solid #ccc;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
     }
     .image-box img {
       max-width: 100%;
-      max-height: 300px;
+      max-height: 100%;
       object-fit: contain;
     }
   </style>
@@ -105,26 +109,28 @@
   </div>
 
   <div id="main-content">
+    <!-- 초기 홈 화면 -->
     <div class="section">
       <h3>학교 사진</h3>
       <div class="image-box">
         <img src="images/school.png" alt="학교 사진">
       </div>
     </div>
-    
+
     <div class="section">
       <h3>가정통신문</h3>
-      <img src="images/important.png" alt="가정통신문">
+      <div class="image-box">
+        <img src="images/important.png" alt="가정통신문">
       </div>
     </div>
-  
+
     <div class="section">
       <h3>공지사항</h3>
       <div class="image-box">
-        <img src="images/goinge.jpg" alt="공지사항">
+        <img src="images/goinge.png" alt="공지사항">
       </div>
     </div>
-  
+
     <div class="section">
       <h3>오늘의 급식</h3>
       <div class="image-box">
@@ -140,13 +146,15 @@
     }
 
     function loadPage(title) {
-      document.getElementById("main-content").innerHTML = `
-        <div style="padding: 20px;">${title} 페이지입니다.</div>
+      const content = document.getElementById("main-content");
+      content.innerHTML = `
+        <div class="section" style="padding: 20px;">
+          <h3>${title}</h3>
+          <p>${title} 페이지입니다.</p>
+        </div>
       `;
       document.getElementById("title").innerText = title;
       document.getElementById("backIcon").style.display = "block";
-
-      // 메뉴 닫기 추가
       document.getElementById("menu").style.display = "none";
     }
 
@@ -155,28 +163,25 @@
         <div class="section">
           <h3>학교 사진</h3>
           <div class="image-box">
-          <img src="images/school.png" alt="학교 사진">
+            <img src="images/school.png" alt="학교 사진">
           </div>
         </div>
-
         <div class="section">
           <h3>가정통신문</h3>
           <div class="image-box">
-      <img src="images/important.png" alt="가정통신문">
+            <img src="images/important.png" alt="가정통신문">
           </div>
         </div>
-
         <div class="section">
           <h3>공지사항</h3>
           <div class="image-box">
-        <img src="images/goinge.png" alt="공지사항">
+            <img src="images/goinge.png" alt="공지사항">
           </div>
         </div>
-
         <div class="section">
           <h3>오늘의 급식</h3>
           <div class="image-box">
-        <img src="images/food.png" alt="급식">
+            <img src="images/food.png" alt="급식">
           </div>
         </div>
       `;
@@ -184,7 +189,6 @@
       document.getElementById("backIcon").style.display = "none";
     }
 
-    // 외부 클릭 시 메뉴 닫기
     document.addEventListener('click', function(event) {
       const menu = document.getElementById('menu');
       const button = document.querySelector('.menu-button');
