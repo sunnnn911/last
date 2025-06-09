@@ -10,7 +10,7 @@
       padding: 0;
       font-family: Arial, sans-serif;
       height: 100%;
-      overflow: auto;
+      overflow-y: auto;
     }
 
     header {
@@ -38,7 +38,7 @@
     }
 
     .title-text {
-      font-size: 30pt;
+      font-size: 24pt;
       color: #003399;
       font-weight: bold;
       text-align: center;
@@ -77,9 +77,9 @@
     }
 
     #main-content {
-      height: 90vh; /* 100vh - header(10vh) = 90vh */
       display: flex;
       flex-direction: column;
+      height: calc(90vh); /* 16:9 전체 높이 기준 */
     }
 
     .section {
@@ -88,16 +88,24 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      border-top: 1px solid #ccc;
+      border-bottom: 1px solid #ccc;
     }
 
-    .section:nth-child(1) {
-      flex: 2; /* 2/5 = 40% */
+    .section.large {
+      flex: 2; /* 학교 사진은 2/5 비율 */
     }
 
-    .section img {
-      max-height: 90%;
-      max-width: 90%;
+    .image-box {
+      width: 90%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .image-box img {
+      max-height: 100%;
+      max-width: 100%;
       object-fit: contain;
     }
   </style>
@@ -125,21 +133,32 @@
   </div>
 
   <div id="main-content">
-    <div class="section">
+    <div class="section large">
       <h3>학교 사진</h3>
-      <img src="images/school.png" alt="학교 사진" />
+      <div class="image-box">
+        <img src="images/school.png" alt="학교 사진">
+      </div>
     </div>
+
     <div class="section">
       <h3>가정통신문</h3>
-      <img src="images/important.png" alt="가정통신문" />
+      <div class="image-box">
+        <img src="images/important.png" alt="가정통신문">
+      </div>
     </div>
+
     <div class="section">
       <h3>공지사항</h3>
-      <img src="images/goinge.png" alt="공지사항" />
+      <div class="image-box">
+        <img src="images/goinge.png" alt="공지사항">
+      </div>
     </div>
+
     <div class="section">
       <h3>오늘의 급식</h3>
-      <img src="images/food.png" alt="급식" />
+      <div class="image-box">
+        <img src="images/food.png" alt="급식">
+      </div>
     </div>
   </div>
 
@@ -150,12 +169,8 @@
     }
 
     function loadPage(title) {
-      const content = document.getElementById("main-content");
-      content.innerHTML = `
-        <div class="section" style="flex: 1; padding: 20px;">
-          <h3>${title}</h3>
-          <p>${title} 페이지입니다.</p>
-        </div>
+      document.getElementById("main-content").innerHTML = `
+        <div style="padding: 20px;">${title} 페이지입니다.</div>
       `;
       document.getElementById("title").innerText = title;
       document.getElementById("backIcon").style.display = "block";
@@ -164,21 +179,29 @@
 
     function goHome() {
       document.getElementById("main-content").innerHTML = `
-        <div class="section">
+        <div class="section large">
           <h3>학교 사진</h3>
-          <img src="images/school.png" alt="학교 사진" />
+          <div class="image-box">
+            <img src="images/school.png" alt="학교 사진">
+          </div>
         </div>
         <div class="section">
           <h3>가정통신문</h3>
-          <img src="images/important.png" alt="가정통신문" />
+          <div class="image-box">
+            <img src="images/important.png" alt="가정통신문">
+          </div>
         </div>
         <div class="section">
           <h3>공지사항</h3>
-          <img src="images/goinge.png" alt="공지사항" />
+          <div class="image-box">
+            <img src="images/goinge.png" alt="공지사항">
+          </div>
         </div>
         <div class="section">
           <h3>오늘의 급식</h3>
-          <img src="images/food.png" alt="급식" />
+          <div class="image-box">
+            <img src="images/food.png" alt="급식">
+          </div>
         </div>
       `;
       document.getElementById("title").innerText = "에듀아띠고";
